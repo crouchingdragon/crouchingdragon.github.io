@@ -6,12 +6,20 @@ if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
 }
 
 const constraints = {
-    video: {
-        width: 320,
-        height: 180,
-        facingMode: 'environment',
+  video: {
+    facingMode: {
+      exact: "environment"
     }
+  }
 };
+
+//const constraints = {
+//    video: {
+//        width: 320,
+//        height: 180,
+//        facingMode: 'environment',
+//    }
+//};
 
 window.navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
