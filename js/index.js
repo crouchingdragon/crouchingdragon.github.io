@@ -11,15 +11,25 @@ const constraints = {
         height: 180,
         facingMode: 'environment',
     }
-}
+};
 
-async function initCam() {
-    try {
-        const vidStream = await navigator.mediaDevices.getUserMedia(constraints);
-    vid.srcObject = vidStream;
-    } catch (err) {
-        console.log('access to camera denied');
-    }
-}
+window.navigator.mediaDevices.getUserMedia(constraints)
+    .then(stream => {
+        vid.srcObject = stream;
+        vid.onloadedmetadata = () => {
+            vid.play();
+        };
+    }).catch(() => {
+        console.log("cam stream can't play");
+    });
 
-initCam();
+//async function initCam() {
+//    try {
+//        const vidStream = await navigator.mediaDevices.getUserMedia(constraints);
+//        vid.srcObject = vidStream;
+//    } catch (err) {
+//        console.log('access to camera denied');
+//    }
+//}
+//
+//initCam();
