@@ -5,11 +5,17 @@ if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
     console.log('media devices exist');
 }
 
+//const constraints = {
+//  video: {
+//    facingMode: {
+//      exact: "environment"
+//    }
+//  }
+//};
+
 const constraints = {
   video: {
-    facingMode: {
-      exact: "environment"
-    }
+    facingMode: "environment",
   }
 };
 
@@ -21,15 +27,9 @@ const constraints = {
 //    }
 //};
 
-window.navigator.mediaDevices.getUserMedia(constraints)
-    .then(stream => {
-        vid.srcObject = stream;
-        vid.onloadedmetadata = () => {
-            vid.play();
-        };
-    }).catch(() => {
-        console.log("cam stream can't play");
-    });
+navigator.mediaDevices.getUserMedia(constraints)
+    .then((stream) => {vid.srcObject=stream})
+    .catch(console.error);
 
 //async function initCam() {
 //    try {
